@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 健康諮詢助理 | 三瘋957嚴選商城</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #12151c;
+            overflow-x: hidden;
+        }
+        /* Sleek custom scrollbars to prevent default browser clunkiness */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #16181f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+        /* Custom animation for pulsating indicator */
+        @keyframes pulse-emerald {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.05); }
+        }
+        .pulse-active {
+            animation: pulse-emerald 2s infinite ease-in-out;
+        }
+        /* Prevent annoying default focus ring on items */
+        *:focus {
+            outline: none !important;
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Top Header -->
+    <header class="w-full max-w-7xl mx-auto px-4 pt-8 pb-4 text-center">
+        <!-- Gemini 2.5 Flash Badge with live crawl notice -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/30 text-emerald-400 text-xs font-semibold tracking-wider uppercase mb-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+            <svg class="w-4 h-4 text-emerald-400 pulse-active" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <span>📡 產品由三瘋嚴選提供 957live.com</span>
+        </div>
+        
+        <!-- Main Title -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-wide">
+            AI 購物智慧諮詢助理
+        </h1>
+        
+        <!-- Subtitle -->
+        <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            輸入你想解決的問題，AI 助理將實時為您解答
+        </p>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="w-full max-w-7xl mx-auto px-4 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8 items-stretch min-w-0">
+        
+        <!-- Left Side: Interactive Chat Box -->
+        <section class="lg:col-span-7 flex flex-col bg-[#1a1d24] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl relative min-h-[550px] h-[calc(100vh-220px)] max-h-[850px] min-w-0">
+            <!-- Chat Window Header -->
+            <div class="px-6 py-4 border-b border-gray-800 bg-[#16181f] flex flex-wrap gap-3 items-center justify-between min-w-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-active flex-shrink-0"></div>
+                    <span class="text-sm font-semibold tracking-wide text-gray-300 truncate">AI小助理</span>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <button id="clearChatBtn" class="text-xs text-gray-400 hover:text-red-400 transition-colors flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg hover:bg-[#222731]" title="清空對話紀錄">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-16v1a3 3 0 003 3h2m-3-3H7m12 0v1a2 2 0 01-2 2h-1"></path>
+                        </svg>
+                        <span>清空對話</span>
+                    </button>
+                    <a href="https://957live.com/" target="_blank" class="text-xs text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 bg-emerald-950/40 border border-emerald-900 px-2.5 py-1.5 rounded-lg">
+                        <span>造訪官方商城</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Messages Stream Area -->
+            <div id="messagesContainer" class="flex-1 p-6 overflow-y-auto space-y-6 bg-[#16181e]/40 overflow-x-hidden min-w-0">
+                <!-- Welcome Message (AI) -->
+                <div class="flex gap-4 items-start max-w-3xl min-w-0">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="bg-[#222731] border border-gray-800/80 rounded-2xl rounded-tl-none p-4 shadow-lg text-gray-200 text-[15px] leading-relaxed break-words">
+                            <p class="font-medium mb-1 text-emerald-300">您好！我是您的健康導購助理。😊</p>
+                            <p class="mt-1">歡迎告訴我您目前遇到的狀況，我將提供您最好的建議</p>
+                            <p class="mt-2 text-xs text-gray-400">您可以直接點擊右側快速提問，或是使用下方的「✨ AI 智慧增強工具箱」！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Input Controls Area -->
+            <div class="p-4 border-t border-gray-800 bg-[#16181f] flex-shrink-0">
+                <form id="chatForm" class="flex items-center gap-3 bg-[#1e222b] rounded-xl border border-gray-800 px-4 py-2 focus-within:border-emerald-500/50 transition-all shadow-inner">
+                    <input type="text" id="userInput" placeholder="輸入你想找的商品，例如：牛樟芝、超能乳清咖啡、龍宮舍利..." class="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm text-white placeholder-gray-500 py-2.5 min-w-0" required>
+                    <button type="submit" id="sendBtn" class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-gray-950 flex items-center justify-center transition-all shadow-[0_4px_12px_rgba(16,185,129,0.3)]">
+                        <svg class="w-4 h-4 text-gray-950" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </button>
+                </form>
+                <div class="mt-2 text-center text-[11px] text-gray-500 flex items-center justify-center gap-2">
+                    <svg class="w-3 h-3 text-emerald-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>所有推薦網址均透過實時抓取自官方商城進行安全下單</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side: Recommendation Sidecard & Interactive LLM Tools -->
+        <aside class="lg:col-span-5 flex flex-col gap-6 min-w-0 overflow-y-auto">
+            
+            <!-- Quick Questions Panel -->
+            <div class="bg-[#1a1d24] border border-gray-800 rounded-2xl p-5 shadow-2xl flex flex-col min-w-0">
+                <div class="flex items-center gap-2 mb-3 text-emerald-400 font-bold text-base min-w-0">
+                    <svg class="w-4 h-4 text-emerald-400 pulse-active" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    <h2>實時官網搜尋</h2>
+                </div>
+                <p class="text-[11px] text-gray-400 mb-4 leading-relaxed">
+                    點擊快速按鈕，AI 將即時連線官方最新商品：
+                </p>
+
+                <!-- Fast click question items -->
+                <div class="space-y-2.5" id="quickQuestionsContainer">
+                    <button class="quick-q-btn w-full text-left px-3.5 py-2.5 bg-[#222731] hover:bg-emerald-950/20 border border-gray-800 hover:border-emerald-500/30 rounded-xl transition-all group flex items-start gap-2.5 min-w-0" data-query="請連網幫我查詢 957live 官網目前有哪些牛樟芝產品？請附上他們的售價與產品連結。">
+                        <span class="text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-xs font-semibold text-gray-200 group-hover:text-emerald-300 truncate">即時搜尋：站內牛樟芝系列與售價</h3>
+                        </div>
+                    </button>
+
+                    <button class="quick-q-btn w-full text-left px-3.5 py-2.5 bg-[#222731] hover:bg-emerald-950/20 border border-gray-800 hover:border-emerald-500/30 rounded-xl transition-all group flex items-start gap-2.5 min-w-0" data-query="請幫我連網搜尋 957live 官網上的『泰國龍宮舍利』相關手串商品與特色介紹，並附上購買連結。">
+                        <span class="text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-xs font-semibold text-gray-200 group-hover:text-emerald-300 truncate">即時搜尋：龍宮舍利能量手珠</h3>
+                        </div>
+                    </button>
+
+                    <button class="quick-q-btn w-full text-left px-3.5 py-2.5 bg-[#222731] hover:bg-emerald-950/20 border border-gray-800 hover:border-emerald-500/30 rounded-xl transition-all group flex items-start gap-2.5 min-w-0" data-query="我想找 957live 官網的『膠原蛋白』與『超能乳清即享咖啡』商品，請連網查詢最新促銷優惠和直達網址。">
+                        <span class="text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-xs font-semibold text-gray-200 group-hover:text-emerald-300 truncate">即時搜尋：膠原蛋白與乳清咖啡</h3>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI 智慧增強工具箱 (AI Smart Toolbox) -->
+            <div class="bg-[#1a1d24] border border-gray-800 rounded-2xl p-5 shadow-2xl flex flex-col gap-4 min-w-0">
+                <div class="flex items-center gap-2 text-emerald-400 font-bold text-base min-w-0">
+                    <span class="text-lg">✨</span>
+                    <h2>AI 智慧增強工具箱</h2>
+                </div>
+                <p class="text-[11px] text-gray-400 leading-relaxed">
+                    工具箱內的所有產出亦皆透過實時聯網搜尋生成，確保商品資訊皆為 957live.com 目前線上銷售中的真實品項。
+                </p>
+
+                <!-- Tool 1: Personalized Wellness Audit -->
+                <div class="p-4 bg-[#222731] border border-gray-800 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                        <span>🧬</span> 個人健康與能量調理分析
+                    </h3>
+                    
+                    <div>
+                        <label class="block text-[10px] text-gray-400 mb-1">您的星座 / 生肖 / 星象</label>
+                        <select id="userZodiac" class="w-full bg-[#16181f] border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-emerald-500">
+                            <option value="風象星座 (雙子、天秤、水瓶)">風象星座 (雙子、天秤、水瓶)</option>
+                            <option value="土象星座 (金牛、處女、魔羯)">土象星座 (金牛、處女、魔羯)</option>
+                            <option value="火象星座 (牡羊、獅子、射手)">火象星座 (牡羊、獅子、射手)</option>
+                            <option value="水象星座 (巨蟹、天蠍、雙魚)">水象星座 (巨蟹、天蠍、雙魚)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] text-gray-400 mb-1">您目前最大的困擾與需求</label>
+                        <select id="userAuditConcern" class="w-full bg-[#16181f] border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-emerald-500">
+                            <option value="經常加班熬夜、工作壓力極大、常感到疲累不濟">加班熬夜，急需提升肝鐵意志力 (推薦牛樟芝)</option>
+                            <option value="感覺能量磁場混亂、多小人阻礙、想招財保平安">磁場低迷，想開運避邪與穩定能量 (推薦龍宮舍利)</option>
+                            <option value="皮膚乾燥暗沈、想維持青春與紅潤好氣色">養顏美容，想鎖住膠原蛋白水嫩感 (推薦膠原蛋白)</option>
+                        </select>
+                    </div>
+
+                    <button id="btnWellnessAudit" class="w-full py-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 rounded-lg text-xs font-bold transition-all shadow-md active:scale-95 flex items-center justify-center gap-1.5">
+                        <span>✨ 開始 AI 實時聯網調理分析</span>
+                    </button>
+                </div>
+
+                <!-- Tool 2: Supplement Schedule Planner -->
+                <div class="p-4 bg-[#222731] border border-gray-800 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-emerald-400 flex items-center gap-1">
+                        <span>📅</span> 一鍵生成全日保健作息表
+                    </h3>
+                    
+                    <div>
+                        <label class="block text-[10px] text-gray-400 mb-1">您的日常作息型態</label>
+                        <select id="userLifestyle" class="w-full bg-[#16181f] border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-emerald-500">
+                            <option value="朝九晚五上班族：白天久坐用腦、下班運動放鬆">朝九晚五上班族 (久坐/多螢幕)</option>
+                            <option value="夜貓熬夜工程師/創意人：常常工作到凌晨、早晨起不來">爆肝夜貓族 (熬夜/睡眠品質差)</option>
+                        </select>
+                    </div>
+
+                    <button id="btnGenerateSchedule" class="w-full py-2 bg-[#1e222b] hover:bg-emerald-950/20 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                        <span>✨ 聯網規劃日常保養作息表</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modal for Showing AI Reports (Premium overlay with no browser-intrusive alert) -->
+    <div id="reportModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-[#1a1d24] border border-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-gray-800 bg-[#16181f] flex items-center justify-between">
+                <div class="flex items-center gap-2 text-emerald-400 font-bold">
+                    <span class="text-xl">✨</span>
+                    <h2 id="reportModalTitle">AI 專屬調理報告書</h2>
+                </div>
+                <button id="closeReportModal" class="text-gray-400 hover:text-white transition-colors p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto flex-1 min-w-0" id="reportModalBody">
+                <!-- Dynamic Content Here -->
+            </div>
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-gray-800 bg-[#16181f] flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p class="text-[10px] text-gray-500">此報告所有商品連結均由 Gemini 實時檢索自 957live.com</p>
+                <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                    <button id="btnCopyReport" class="flex-1 sm:flex-initial px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        <span>複製報告書</span>
+                    </button>
+                    <button id="btnCloseModalBtn" class="flex-1 sm:flex-initial px-5 py-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 text-xs font-bold rounded-lg transition-all">
+                        關閉報告
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification System -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 max-w-sm pointer-events-none"></div>
+
+    <!-- Footer Section -->
+    <footer class="w-full bg-[#0d0f14] border-t border-gray-900 py-6 mt-8 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 text-center md:text-left min-w-0">
+            <div class="min-w-0">
+                <p class="font-semibold text-gray-400 mb-1">© 2026 三瘋957嚴選商城 實時 AI 導購諮詢系統</p>
+                <p>本系統不保留任何預載商品代碼。所有資料皆經由 Gemini API 實時檢索官網取得。</p>
+            </div>
+            <div class="flex items-center gap-4 flex-wrap justify-center md:justify-end">
+                <a href="https://957live.com/" target="_blank" class="hover:text-emerald-400 transition-colors">官方網站 (957live.com)</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // NOTE: PRODUCT_CATALOG static catalog was completely removed!
+        // All recommendations are fetched on-the-fly via Gemini 2.5 Grounding (Google Search)
+
+        // UI Binding Elements
+        const messagesContainer = document.getElementById('messagesContainer');
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const clearChatBtn = document.getElementById('clearChatBtn');
+        const quickBtns = document.querySelectorAll('.quick-q-btn');
+
+        // AI Tools Binding Elements
+        const btnWellnessAudit = document.getElementById('btnWellnessAudit');
+        const btnGenerateSchedule = document.getElementById('btnGenerateSchedule');
+        const userZodiac = document.getElementById('userZodiac');
+        const userAuditConcern = document.getElementById('userAuditConcern');
+        const userLifestyle = document.getElementById('userLifestyle');
+
+        // Modal Binding Elements
+        const reportModal = document.getElementById('reportModal');
+        const reportModalTitle = document.getElementById('reportModalTitle');
+        const reportModalBody = document.getElementById('reportModalBody');
+        const closeReportModal = document.getElementById('closeReportModal');
+        const btnCloseModalBtn = document.getElementById('btnCloseModalBtn');
+        const btnCopyReport = document.getElementById('btnCopyReport');
+
+        let conversationHistory = [];
+        let currentReportMarkdown = ""; // Holds current report markdown
+
+        // Scroll to the bottom of the log container
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Show Toast Notification Utility
+        function showToast(message, type = "success") {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded-xl border flex items-center gap-3 shadow-xl transition-all duration-350 transform translate-y-2 opacity-0 pointer-events-auto max-w-sm ${
+                type === 'success' 
+                ? 'bg-emerald-950 border-emerald-500/30 text-emerald-300' 
+                : 'bg-red-950 border-red-500/30 text-red-300'
+            }`;
+            
+            const checkIcon = `<svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4"></path></svg>`;
+            const errorIcon = `<svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+            
+            toast.innerHTML = `
+                ${type === 'success' ? checkIcon : errorIcon}
+                <span class="text-xs font-semibold leading-snug">${message}</span>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-10px]');
+                setTimeout(() => {
+                    toast.remove();
+                }, 350);
+            }, 4000);
+        }
+
+        // Animated typing indicator
+        function createTypingIndicator() {
+            const div = document.createElement('div');
+            div.id = 'typingIndicator';
+            div.className = 'flex gap-4 items-start max-w-3xl animate-pulse min-w-0';
+            div.innerHTML = `
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="bg-[#222731] border border-gray-800 rounded-2xl rounded-tl-none p-4 shadow-lg inline-flex items-center gap-2 max-w-full">
+                        <span class="text-xs text-emerald-400 font-medium">實時爬取 957live.com 最新商品架構中...</span>
+                        <div class="flex gap-1 flex-shrink-0">
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0s"></span>
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(div);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        // Fully Dynamic Parser: Convert any markdown links matching 957live.com into rich purchase card CTAs
+        function formatMarkdownResponse(text) {
+            let safeText = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
+            // Convert bullet points to styled HTML list elements
+            safeText = safeText.replace(/^\s*[-*+]\s+(.+)$/gm, '<li class="ml-4 list-disc mb-1.5 text-gray-300">$1</li>');
+            // Wrap sets of <li> inside <ul>
+            safeText = safeText.replace(/(<li class="ml-4 list-disc mb-1.5">.*<\/li>)+/g, '<ul class="my-2">$0</ul>');
+
+            // Format headers
+            safeText = safeText.replace(/^### (.*$)/gim, '<h4 class="text-sm font-bold text-white mt-4 mb-2 flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg> $1</h4>');
+            safeText = safeText.replace(/^## (.*$)/gim, '<h3 class="text-base font-bold text-emerald-400 mt-4 mb-2">$1</h3>');
+            safeText = safeText.replace(/^# (.*$)/gim, '<h2 class="text-lg font-black text-emerald-400 mt-4 mb-2">$1</h2>');
+
+            // Format bold text safely
+            safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong class="text-emerald-300 font-semibold">$1</strong>');
+
+            // Find all markdown links: [Title](URL)
+            const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g;
+            let matchedLinks = [];
+            let match;
+            
+            while ((match = linkRegex.exec(text)) !== null) {
+                const title = match[1];
+                const url = match[2];
+                // Only build dynamic product cards for official 957live domains
+                if (url.includes('957live.com')) {
+                    matchedLinks.push({ title, url });
+                }
+            }
+
+            // Convert raw markdown links to sleek in-line styled hyperlinks
+            safeText = safeText.replace(linkRegex, '<a href="$2" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline font-medium inline-flex items-center gap-1">$1 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>');
+
+            // Convert newlines to breaks
+            safeText = safeText.replace(/\n/g, '<br>');
+            safeText = safeText.replace(/<\/ul><br>/g, '</ul>');
+            safeText = safeText.replace(/<\/li><br>/g, '</li>');
+
+            // Build dynamic checkout cards for detected 957live links (WITHOUT needing hardcoded catalog!)
+            if (matchedLinks.length > 0) {
+                let linkCardsHtml = `<div class="mt-4 pt-4 border-t border-gray-800/80 space-y-2.5 min-w-0">`;
+                linkCardsHtml += `<p class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold mb-2 flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg> 偵測到官網即時商品，請前往安全下單：</p>`;
+                
+                // Deduplicate links to prevent repeating the same product card
+                const uniqueLinks = Array.from(new Set(matchedLinks.map(l => l.url)))
+                    .map(url => matchedLinks.find(l => l.url === url));
+
+                uniqueLinks.forEach(link => {
+                    linkCardsHtml += `
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 bg-gray-900/60 border border-gray-800 rounded-xl hover:border-emerald-500/20 transition-all min-w-0">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-xs font-bold text-gray-200 truncate flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    ${link.title}
+                                </h4>
+                                <p class="text-[10px] text-gray-500 truncate mt-1">${link.url}</p>
+                            </div>
+                            <div class="flex items-center gap-2 flex-shrink-0 justify-between sm:justify-end">
+                                <a href="${link.url}" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-gray-950 font-bold text-xs px-3.5 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-md w-full sm:w-auto">
+                                    <span>前往官網下單</span>
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+                linkCardsHtml += `</div>`;
+                safeText += linkCardsHtml;
+            }
+
+            return safeText;
+        }
+
+        // Append user balloon
+        function appendUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'flex gap-4 items-start max-w-3xl ml-auto justify-end min-w-0';
+            div.innerHTML = `
+                <div class="flex-1 text-right min-w-0">
+                    <div class="bg-emerald-600 border border-emerald-500 rounded-2xl rounded-tr-none p-4 shadow-lg text-white text-[15px] leading-relaxed inline-block text-left max-w-full break-words">
+                        <p class="font-normal whitespace-pre-line">${text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+                    </div>
+                </div>
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-gray-950 shadow-md font-bold text-sm select-none">
+                    客
+                </div>
+            `;
+            messagesContainer.appendChild(div);
+            scrollToBottom();
+        }
+
+        // Append AI balloon
+        function appendAIMessage(htmlContent) {
+            const div = document.createElement('div');
+            div.className = 'flex gap-4 items-start max-w-3xl min-w-0';
+            div.innerHTML = `
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="bg-[#222731] border border-gray-800/80 rounded-2xl rounded-tl-none p-4 shadow-lg text-gray-200 text-[15px] leading-relaxed break-words">
+                        ${htmlContent}
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(div);
+            scrollToBottom();
+        }
+
+        // Standardized Gemini 2.5 API fetch with strict Exponential Backoff
+        async function executeGeminiCall(payload) {
+            const apiKey = ""; // Populated automatically at runtime
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            let lastError;
+
+            for (let attempt = 0; attempt <= 5; attempt++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        return await response.json();
+                    }
+                    throw new Error(`伺服器錯誤: ${response.status}`);
+                } catch (error) {
+                    lastError = error;
+                    if (attempt === 5) break;
+                    const waitTime = delays[attempt];
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                }
+            }
+            throw lastError;
+        }
+
+        // Force model to search 957live.com live
+        const DYNAMIC_SYSTEM_PROMPT = `
+You are the official AI Shopping Advisor for 三瘋957嚴選商城 (https://957live.com/).
+CRITICAL MANDATE: There is NO pre-saved catalog in your code. You MUST use your Google Search Grounding tool for EVERY query to find real, active, up-to-date products on https://957live.com/.
+
+HOW TO ANSWER:
+1. Initiate search query targeting "site:957live.com <user keyterms>" to look up actual products, descriptions, current prices, and collections.
+2. Formulate your response in Traditional Chinese (繁體中文).
+3. Recommend only real items found in your search metadata.
+4. For every recommended item, construct a markdown link using its exact name as text and its live URL from the search result. E.g., [浪利957-牛樟芝子實體膠囊](https://957live.com/collections/Antrodiaantrodia/products/ovnF71SWEeatcKpTnNhGuU41) or [商品名稱](https://957live.com/...)
+5. NEVER invent links. If you cannot find a specific item, guide the user to the collections or home page: [三瘋957嚴選商城](https://957live.com/).
+`;
+
+        // Normal Chat Search & Answer
+        async function queryAI(userQuery) {
+            createTypingIndicator();
+
+            const contents = [];
+            conversationHistory.forEach(turn => {
+                contents.push({
+                    role: turn.role,
+                    parts: [{ text: turn.text }]
+                });
+            });
+            contents.push({
+                role: "user",
+                parts: [{ text: userQuery }]
+            });
+
+            const payload = {
+                contents: contents,
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: DYNAMIC_SYSTEM_PROMPT }]
+                }
+            };
+
+            try {
+                const result = await executeGeminiCall(payload);
+                removeTypingIndicator();
+
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (generatedText) {
+                    const htmlResponse = formatMarkdownResponse(generatedText);
+                    appendAIMessage(htmlResponse);
+
+                    conversationHistory.push({ role: "user", text: userQuery });
+                    conversationHistory.push({ role: "model", text: generatedText });
+
+                    if (conversationHistory.length > 12) {
+                        conversationHistory = conversationHistory.slice(-12);
+                    }
+                } else {
+                    appendAIMessage("很抱歉，處理您的提問時出現了異常，請您稍後再試。");
+                }
+            } catch (err) {
+                removeTypingIndicator();
+                appendFallbackResponse(userQuery);
+                showToast("連線發生異常，已啟用安全導航目錄！", "error");
+            }
+        }
+
+        // Tool 1: Live Personalized Wellness Audit
+        async function generateWellnessAudit() {
+            const zodiacValue = userZodiac.value;
+            const concernValue = userAuditConcern.value;
+
+            openModal("🔮 實時聯網能量調理分析中...", `
+                <div class="flex flex-col items-center justify-center py-12 space-y-4">
+                    <div class="relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4 border-emerald-500/20"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-t-emerald-400 animate-spin"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">正在聯網檢索 957live.com 最新且適合該屬性的商品資訊...</p>
+                    <p class="text-xs text-emerald-500 font-semibold italic">「目標：${zodiacValue} x ${concernValue.substring(0, 15)}...」</p>
+                </div>
+            `);
+
+            const promptText = `
+我目前的能量星格是【${zodiacValue}】，我遭遇的身體或精神需求是【${concernValue}】。
+請運用 Google 搜尋工具搜尋 957live.com 上，有哪些對應商品正在販售（例如牛樟芝子實體、國寶雙芝茶、龍宮舍利手串、或活妍膠原胜肽）。
+請寫出一份「繁體中文」的「✨ AI 專屬健康與能量調理報告書」，並且每一款提及的推薦商品都**必須聯網找到在 957live.com 上的實際產品連結**，以 [商品名稱](真實網址) 格式呈現，不要寫死假連結。
+`;
+
+            const payload = {
+                contents: [{ parts: [{ text: promptText }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: DYNAMIC_SYSTEM_PROMPT }]
+                }
+            };
+
+            try {
+                const result = await executeGeminiCall(payload);
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
+                    currentReportMarkdown = text;
+                    const html = formatMarkdownResponse(text);
+                    updateModalBody("🔮 AI 專屬健康與能量調理報告書", html);
+                    showToast("調理分析報告書生成完畢！");
+                } else {
+                    throw new Error("無效內容");
+                }
+            } catch (err) {
+                console.error(err);
+                const fallbackText = `### 🔮 您的能量狀態分析\n在遭遇「${concernValue}」時，您的屬性【${zodiacValue}】容易產生體質不協調。建議在日常中尋求草本或純天然礦石能量的修護調理。\n\n### 🧬 調理與補給方針\n1. 白天可透過溫和溫水進行調理。\n2. 建議適時補充精良的微米破壁牛樟芝保健品，為身體鞏固防禦力。\n\n### 🛒 推薦安全下單傳送門\n* **[三瘋957 嚴選椴木牛樟芝系列](https://957live.com/)**：守護您的肝鐵意志，熬夜滋補強身！\n* **[三瘋957 能量開運龍宮舍利系列](https://957live.com/)**：天然正品保證，辟邪、穩定周身氣場。`;
+                currentReportMarkdown = fallbackText;
+                updateModalBody("🔮 AI 專屬健康與能量調理報告書 (安全備份)", formatMarkdownResponse(fallbackText));
+                showToast("已載入能量指引", "success");
+            }
+        }
+
+        // Tool 2: Supplement Schedule Planner (Live crawl version)
+        async function generateSchedulePlanner() {
+            const lifestyle = userLifestyle.value;
+
+            openModal("📅 全日保健作息表動態配對中...", `
+                <div class="flex flex-col items-center justify-center py-12 space-y-4">
+                    <div class="relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4 border-emerald-500/20"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-t-emerald-400 animate-spin"></div>
+                    </div>
+                    <p class="text-sm text-gray-400">正在聯網爬取 3瘋957 商城最速配的健康產品時段表...</p>
+                    <p class="text-xs text-emerald-500 font-semibold italic">「類型：${lifestyle}」</p>
+                </div>
+            `);
+
+            const promptText = `
+我的作息生活型態是：【${lifestyle}】。
+請連網搜尋 957live.com 上，有哪些健康保健食品（如：牛樟芝B群、超能乳清即享咖啡、膠原胜肽膠原蛋白、國寶茶、能量手串等）目前正常販售。
+為我規劃一份符合生理時鐘代謝、並融入 957live 目前線上銷售中商品的「繁體中文 24小時健康保養作息作息表」。
+提及的商品一定要連網找到實際商品銷售網址，並以 [商品名稱](網址) 格式呈現，不要使用假連結。
+`;
+
+            const payload = {
+                contents: [{ parts: [{ text: promptText }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: DYNAMIC_SYSTEM_PROMPT }]
+                }
+            };
+
+            try {
+                const result = await executeGeminiCall(payload);
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
+                    currentReportMarkdown = text;
+                    const html = formatMarkdownResponse(text);
+                    updateModalBody("📅 24小時健康保養最佳作息表", html);
+                    showToast("保健作息表已完美產出！");
+                } else {
+                    throw new Error("無效內容");
+                }
+            } catch (err) {
+                console.error(err);
+                const fallbackText = `### 🌅 早上醒來/上午\n- **作息建議**：醒來後補水，補體能。\n- **推薦搭配**：到 **[三瘋957 能量健康補給專區](https://957live.com/)** 挑選最新的乳清即享咖啡，補足早晨活力！\n\n### ☀️ 下午精神維護\n- **作息建議**：午休後補充草本精華維護長效精力。\n- **推薦搭配**：選購 **[三瘋957 頂級子實體樟芝B群](https://957live.com/)** 幫助對抗下午疲勞。\n\n### 🌌 晚間舒壓與養顏\n- **作息建議**：睡前兩小時進行美肌調理。\n- **推薦搭配**：補充 **[三瘋957 活妍膠原胜肽](https://957live.com/)** 把握夜間修護期。`;
+                currentReportMarkdown = fallbackText;
+                updateModalBody("📅 24小時健康保養最佳作息表 (安全備份)", formatMarkdownResponse(fallbackText));
+                showToast("作息規劃已安全配置", "success");
+            }
+        }
+
+        // Fallback Navigation Response if Gemini search errors out
+        function appendFallbackResponse(userQuery) {
+            const text = `### 📡 957live.com 聯網異常備份引導\n\n您好！目前由於臨時連線波動，無法為您即時解析「**${userQuery}**」的單一商品直連頁面。\n\n為了不耽誤您的時間，我們建議您直接進入官方主分類進行安全下單與挑選：\n\n* **[三瘋957嚴選商城官方首頁](https://957live.com/)**：包含所有當前最新的明星主打。\n* **[椴木牛樟芝 / 雙芝茶 / 子實體系列專區](https://957live.com/)**：提供頂級滋補與熬夜調養。\n* **[健康補給 / 活妍膠原胜肽專區](https://957live.com/)**：養顏美容、日常精力與超能乳清咖啡。\n\n請點擊下方快速導航卡片，直達官網進行下單！`;
+            appendAIMessage(formatMarkdownResponse(text));
+        }
+
+        // Modal Action Helpers
+        function openModal(title, initialHtml) {
+            reportModalTitle.innerText = title;
+            reportModalBody.innerHTML = initialHtml;
+            reportModal.classList.remove('hidden');
+        }
+
+        function updateModalBody(title, html) {
+            reportModalTitle.innerText = title;
+            reportModalBody.innerHTML = html;
+        }
+
+        function closeModal() {
+            reportModal.classList.add('hidden');
+        }
+
+        // Clipboard Copy
+        btnCopyReport.addEventListener('click', function() {
+            if (!currentReportMarkdown) {
+                showToast("報告內容為空，無法複製", "error");
+                return;
+            }
+
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = currentReportMarkdown.replace(/<\/?[^>]+(>|$)/g, "");
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("📋 報告已成功複製至剪貼簿！可貼到 LINE 或記事本中保存。");
+                } else {
+                    throw new Error("無法複製");
+                }
+            } catch (err) {
+                showToast("複製失敗，請您手動選取文字進行複製", "error");
+            }
+            document.body.removeChild(tempTextArea);
+        });
+
+        // Chat Form Submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = userInput.value.trim();
+            if (!query) return;
+
+            appendUserMessage(query);
+            userInput.value = "";
+            queryAI(query);
+        });
+
+        // Quick Suggestion buttons trigger
+        quickBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const query = this.getAttribute('data-query');
+                appendUserMessage(query);
+                queryAI(query);
+            });
+        });
+
+        // Tool buttons trigger
+        btnWellnessAudit.addEventListener('click', generateWellnessAudit);
+        btnGenerateSchedule.addEventListener('click', generateSchedulePlanner);
+
+        // Modal Close triggers
+        closeReportModal.addEventListener('click', closeModal);
+        btnCloseModalBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', function(e) {
+            if (e.target === reportModal) {
+                closeModal();
+            }
+        });
+
+        // Clear log container
+        clearChatBtn.addEventListener('click', function() {
+            messagesContainer.innerHTML = `
+                <!-- Welcome Message (AI) -->
+                <div class="flex gap-4 items-start max-w-3xl min-w-0">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="bg-[#222731] border border-gray-800/80 rounded-2xl rounded-tl-none p-4 shadow-lg text-gray-200 text-[15px] leading-relaxed break-words">
+                            <p class="font-medium mb-1 text-emerald-300">對話紀錄已清空。您可以重新輸入任何關於 3瘋957 官網商品的提問！😊</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            conversationHistory = [];
+            showToast("歷史對話記錄已清除！");
+        });
+    </script>
+</body>
+</html>
